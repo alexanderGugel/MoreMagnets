@@ -57,9 +57,11 @@ server.post('/submit', function (req, res) {
       // Everything is ok, insert Magnet in database.
       var createdAt = new Date().getTime();
       var ip = req.headers['x-forwarded-for'] || req.connection.remoteAddress;
+      // Use short names for performance reasons.
       redis.hmset('m:' + magnet.infoHash, {
         mu: magnetURI, // Magnet URI
-        pmu: JSON.stringify(magnet), // Parsed Magnet URI
+        n: magnet.name,
+        ih: magnet.infoHash,
         ca: createdAt, // Created at (Unix timestamp)
         ip: ip
       }, function (err) {
