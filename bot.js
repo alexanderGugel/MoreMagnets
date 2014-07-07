@@ -13,7 +13,7 @@ dht.listen(dhtPort, function () {
   console.log('Bot started listening on port ' + dhtPort);
 });
 
-var crawl = function (magnetUri) {
+var crawl = function (magnetUri, callback) {
   console.info('Crawling ' + magnetUri);
   // dht.lookup('CE9FBDAA734CFBC160E8EF9D29072646C09958DD');
   // Issue lookup multiple times (UDP packages might get lost).
@@ -38,6 +38,7 @@ var crawlNext = function () {
     if (err) {
       console.error('Failed to retrieve crawl job: ' + err.message);
     } else if (magnetUri) {
+      // Emulate ring buffer.
       redis.rpush('crawl', magnetUri);
       crawl(magnetUri, function (err, data) {
       });
