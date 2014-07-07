@@ -33,20 +33,25 @@
       Bay</em>, but without annoying Porn ads and a better and more consistent
       implementation of the BitTorrent DHT protocol.
     </p> -->
-    {{#items}}
-      {{#first}}
-        <li><strong>{{name}}</strong></li>
-      {{/first}}
-      {{#link}}
-        <li><a href="{{url}}">{{name}}</a></li>
-      {{/link}}
-    {{/items}}
+    <section id="magnets" class="pure-g">
+      {{#items}}
+        {{#link}}
+          <article class="pure-u-1 pure-u-md-1-2"><a href="{{url}}">{{name}}</a></article>
+        {{/link}}
+      {{/items}}
+    </section>
 
     <footer>
       <form method="post" id="submit">
-        <h5>Feel like infringing copyright? <small>- Submit a Magnet Link!</small></h5>
+        <h5>Feel like infringing someone's copyright? <small>- Submit a Magnet Link!</small></h5>
         <input type="text" name="magnet-uri" placeholder="Magnet URI" required><input type="submit" value="Submit!">
       </form>
+      <nav>
+        <a href="#">FAQ</a>
+        <a href="#">DMCA Notices</a>
+        <a href="#">DHT Stats</a>
+        <a href="#">About</a>
+      </nav>
     </footer>
     <!-- // <script src="http://d3js.org/d3.v3.min.js" charset="utf-8"></script> -->
   </body>
