@@ -22,5 +22,6 @@
     "gulp": "^3.8.5",
     "gulp-jshint": "^1.6.4",
     "gulp-nodemon": "^1.0.4"
-  }
+  },
+  "private": "true"
 }
