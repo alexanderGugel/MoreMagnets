@@ -31,6 +31,7 @@ dht.on('peer', function (addr, infoHash, from) {
     // Store historical points, so they can be easily graphed later on.
     // stop = current timestamp, no need to regenerate it.
     redis.zadd('m:' + infoHash + ':ps', stop, numberOfPeers);
+    redis.zadd('m:top', numberOfPeers, infoHash);
   });
 });
 

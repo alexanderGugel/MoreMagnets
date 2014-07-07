@@ -28,15 +28,17 @@ server.use(bodyParser.urlencoded());
 
 // Serve index page.
 server.get('/', function (req, res) {
-  res.render('index', {
-    "header": "Colors",
-    "top": [
-        {"name": "red", "first": true, "url": "#Red"},
-        {"name": "green", "link": true, "url": "#Green"},
-        {"name": "blue", "link": true, "url": "#Blue"},
-        {"name": "blue", "link": true, "url": "#Blue"}
-    ],
-    "empty": false
+  redis.zrevrange('m:top', 0, 20, function (err, infoHashes) {
+    // Performance optimization: Get multiple magnets at once.
+    var multi = redis.multi();
+    _.each(infoHashes, function (infoHash) {
+      multi.hgetall('m:' + infoHash);
+    });
+    multi.exec(function (err, magnets) {
+      res.render('index', {
+        top: magnets
+      })
+    });
   });
 });
 
