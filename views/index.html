@@ -44,15 +44,16 @@
     <footer>
       <form method="post" id="submit">
         <h5>Feel like infringing someone's copyright? <small>- Submit a Magnet Link!</small></h5>
-        <input type="text" name="magnet-uri" placeholder="Magnet URI" required><input type="submit" value="Submit!">
+        <input type="text" name="magnet" placeholder="Magnet URI" required><input type="submit" value="Submit!">
       </form>
       <nav>
-        <a href="#">FAQ</a>
-        <a href="#">DMCA Notices</a>
-        <a href="#">DHT Stats</a>
-        <a href="#">About</a>
+        <a href="/faq">FAQ</a>
+        <a href="/dmca">DMCA Notices</a>
+        <a href="/dht-stats">DHT Stats</a>
+        <a href="/about">About</a>
       </nav>
     </footer>
-    <!-- // <script src="http://d3js.org/d3.v3.min.js" charset="utf-8"></script> -->
+    <script src="bower_components/chartjs/Chart.min.js"></script>
+    <script src="js/main.js"></script>
   </body>
 </html>
