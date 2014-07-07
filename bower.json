@@ -1,0 +1,13 @@
+{
+  "name": "trrnts",
+  "version": "0.0.0",
+  "homepage": "https://github.com/alexanderGugel/trrnts",
+  "authors": [
+    "Alexander Gugel <alexander.gugel@gmail.com>"
+  ],
+  "license": "ISC",
+  "private": true,
+  "dependencies": {
+    "chartjs": "~0.2.0"
+  }
+}
