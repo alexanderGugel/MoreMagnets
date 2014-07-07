@@ -25,7 +25,7 @@
         <a href="/" class="logo">trrnts</a>
       </div>
       <div class="pure-u-1-3">
-        <a href="#submit" class="submit">Submit a magnet</a>
+        <small><a href="#submit" class="submit">Submit a magnet</a></small>
       </div>
     </header>
     <!-- <p class="lead">
@@ -33,13 +33,29 @@
       Bay</em>, but without annoying Porn ads and a better and more consistent
       implementation of the BitTorrent DHT protocol.
     </p> -->
-    <section id="magnets" class="pure-g">
-      {{#items}}
-        {{#link}}
-          <article class="pure-u-1 pure-u-md-1-2"><a href="{{url}}">{{name}}</a></article>
-        {{/link}}
-      {{/items}}
+    <section id="top" class="pure-g">
+      {{#top}}
+        <article class="pure-u-1 pure-u-md-1-2">
+          <h4><a href="{{url}}">{{name}}</a></h4>
+        </article>
+      {{/top}}
     </section>
+    <section class="pure-g">
+      <section id="latest" class="pure-u-1 pure-u-md-3-4">
+        {{#items}}
+          {{#link}}
+            <article class="pure-u-1 pure-u-md-1-2"><a href="{{url}}">{{name}}</a></article>
+          {{/link}}
+        {{/items}}
+      </section>
+      <section id="upcoming" class="pure-u-1 pure-u-md-1-4">
+        test
+      </section>
+    </section>
+    <section id="stats">
+
+    </section>
+
 
     <footer>
       <form method="post" action="submit" id="submit">

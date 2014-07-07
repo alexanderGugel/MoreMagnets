@@ -36,7 +36,7 @@ with `html`, `button`, `input`, `select`, and `textarea`. Pure Grids use
 specific font stacks to ensure the greatest OS/browser compatibility.
 */
 html, button, input, select, textarea, .pure-g [class *= "pure-u"] {
-  font: 18px/1.7 "Open Sans", "Helvetica Neue", Helvetica, Arial sans-serif;
+  font: 16px/1.7 "Open Sans", "Helvetica Neue", Helvetica, Arial sans-serif;
   color: #333;
 }
 
@@ -71,13 +71,22 @@ header div:last-child {
   text-align: right;
 }
 
-article {
-  border: 1px solid #eee;
-  padding: 1em;
+#top article {
+  border-bottom: 1px solid #eee;
+  padding: 0.5em;
 }
 
-article:nth-child(odd) {
-  border-right: 0;
+#top article:last-child {
+  border-bottom: 0;
+}
+
+#top article h4 {
+  margin: 0;
+}
+
+#top article a {
+  color: #333;
+  text-decoration: none;
 }
 
 footer {
@@ -124,5 +133,17 @@ footer nav a {
 @media screen and (min-width: 48em) {
   html {
     padding: 0 3em;
+  }
+  #top article {
+    border: 1px solid #eee;
+    border-bottom: 0;
+    padding: 1em;
+  }
+  #top article:nth-child(odd) {
+    border-right: 0;
+  }
+
+  #top article:nth-last-child(2), #top article:last-child {
+    border-bottom: 1px solid #eee;
   }
 }
