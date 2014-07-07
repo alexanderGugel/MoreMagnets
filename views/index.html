@@ -14,12 +14,19 @@
     <!--[if gt IE 8]><!-->
         <link rel="stylesheet" href="http://yui.yahooapis.com/pure/0.5.0/grids-responsive-min.css">
     <!--<![endif]-->
-    <!-- <link rel="stylesheet" href="http://fonts.googleapis.com/css?family=Open+Sans:400,600,700,800,300"> -->
+    <link rel="stylesheet" href="http://fonts.googleapis.com/css?family=Open+Sans:400,600,700,800,300">
     <link rel="stylesheet" href="css/main.css">
   </head>
   <body>
-    <header>
-      <a href="/" class="logo">trrnts</a>
+    <header class="pure-g">
+      <div class="pure-u-1-3">
+      </div>
+      <div class="pure-u-1-3">
+        <a href="/" class="logo">trrnts</a>
+      </div>
+      <div class="pure-u-1-3">
+        <a href="#submit" class="submit">Submit a magnet</a>
+      </div>
     </header>
     <!-- <p class="lead">
       Welcome to <strong>trrnts</strong>. This is exactly like <em>The Pirate
@@ -34,6 +41,13 @@
         <li><a href="{{url}}">{{name}}</a></li>
       {{/link}}
     {{/items}}
-    <script src="http://d3js.org/d3.v3.min.js" charset="utf-8"></script>
+
+    <footer>
+      <form method="post" id="submit">
+        <h5>Feel like infringing copyright? <small>- Submit a Magnet Link!</small></h5>
+        <input type="text" name="magnet-uri" placeholder="Magnet URI" required><input type="submit" value="Submit!">
+      </form>
+    </footer>
+    <!-- // <script src="http://d3js.org/d3.v3.min.js" charset="utf-8"></script> -->
   </body>
 </html>
