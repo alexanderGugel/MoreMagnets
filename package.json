@@ -18,10 +18,5 @@
     "magnet-uri": "^2.0.1",
     "redis": "^0.10.3"
   },
-  "devDependencies": {
-    "gulp": "^3.8.5",
-    "gulp-jshint": "^1.6.4",
-    "gulp-nodemon": "^1.0.4"
-  },
   "private": "true"
 }
