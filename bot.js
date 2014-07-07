@@ -8,7 +8,7 @@ var dht = new DHT();
 var dhtPort = process.env.DHT_PORT || 6881;
 
 dht.listen(dhtPort, function () {
-  console.log('now listening');
+  console.log('Bot started listening on port ' + dhtPort);
 });
 
 // Don't lookup before dht is ready (started listening).
@@ -21,5 +21,3 @@ var i = 0;
 dht.on('peer', function (addr, hash, from) {
   console.log(i++, 'found potential peer ' + addr + ' using ' + from);
 });
-
-console.log('bot2');
