@@ -44,28 +44,29 @@ server.post('/submit', function (req, res) {
   // TODO Display flash messages!
   var magnetURI = req.body['magnet-uri'];
   var magnet = parseMagnetURI(magnetURI);
-  console.log(magnet);
+  console.info('Parsed ' + magnetURI + ' as ' + JSON.stringify(magnet));
   // Empty parsed object -> invalid magnet link!
   if (_.isEmpty(magnet)) {
     return res.redirect('/');
   }
   // Don't insert duplicates!
-  redis.exists('magnet:' + magnet.infoHash, function (err, exists) {
+  redis.exists('m:' + magnet.infoHash, function (err, exists) {
     if (exists) {
       res.redirect('/');
     } else {
       // Everything is ok, insert Magnet in database.
       var createdAt = new Date().getTime();
-      redis.hmset('magnet:' + magnet.infoHash, {
-        magnetURI: magnetURI,
-        parsedMagnetURI: JSON.stringify(magnet),
-        createdAt: createdAt,
-        ip: req.headers['x-forwarded-for'] || req.connection.remoteAddress
+      var ip = req.headers['x-forwarded-for'] || req.connection.remoteAddress;
+      redis.hmset('m:' + magnet.infoHash, {
+        mu: magnetURI, // Magnet URI
+        pmu: JSON.stringify(magnet), // Parsed Magnet URI
+        ca: createdAt, // Created at (Unix timestamp)
+        ip: ip
       }, function (err) {
-        redis.sadd('magnets:all', magnet.infoHash);
-        redis.zadd('magnets:createdAt', createdAt, magnet.infoHash);
-        redis.sadd('magnets:ip:' + ip, magnet.infoHash);
-        redis.rpush('magnets:crawl', magnet.infoHash);
+        redis.sadd('m:all', magnet.infoHash);
+        redis.zadd('m:ca', createdAt, magnet.infoHash);
+        redis.sadd('m:ip:' + ip, magnet.infoHash);
+        redis.rpush('m:crawl', magnet.infoHash);
         // Insertion complete.
         res.redirect('/');
       });

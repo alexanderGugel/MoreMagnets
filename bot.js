@@ -9,7 +9,7 @@ var dht = new DHT();
 var dhtPort = process.env.DHT_PORT || 6881;
 
 dht.listen(dhtPort, function () {
-  console.log('Bot started listening on port ' + dhtPort);
+  console.info('Bot started listening on port ' + dhtPort);
 });
 
 var crawl = function (infoHash, callback) {
@@ -33,13 +33,14 @@ var crawl = function (infoHash, callback) {
 };
 
 var crawlNext = function () {
-  redis.lpop('magnets:crawl', function (err, infoHash) {
+  redis.lpop('m:crawl', function (err, infoHash) {
     if (err) {
       console.error('Failed to retrieve crawl job: ' + err.message);
     } else if (infoHash) {
       // Emulate ring buffer.
-      redis.rpush('crawl', infoHash);
+      redis.rpush('m:crawl', infoHash);
       crawl(infoHash, function (err, data) {
+        console.log(data);
       });
     }
   });
