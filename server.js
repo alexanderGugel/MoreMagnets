@@ -1,8 +1,11 @@
+var _ = require('lodash');
+
 var express = require('express');
 
 // Require middleware-modules.
 var bodyParser = require('body-parser');
 var cookieParser = require('cookie-parser');
+var parseMagnetURI = require('magnet-uri');
 
 // Initialize server.
 var server = express();
@@ -33,6 +36,40 @@ server.get('/', function (req, res) {
         {"name": "blue", "link": true, "url": "#Blue"}
     ],
     "empty": false
+  });
+});
+
+// Store a new Magnet URI.
+server.post('/submit', function (req, res) {
+  // TODO Display flash messages!
+  var magnetURI = req.body['magnet-uri'];
+  var magnet = parseMagnetURI(magnetURI);
+  console.log(magnet);
+  // Empty parsed object -> invalid magnet link!
+  if (_.isEmpty(magnet)) {
+    return res.redirect('/');
+  }
+  // Don't insert duplicates!
+  redis.exists('magnet:' + magnet.infoHash, function (err, exists) {
+    if (exists) {
+      res.redirect('/');
+    } else {
+      // Everything is ok, insert Magnet in database.
+      var createdAt = new Date().getTime();
+      redis.hmset('magnet:' + magnet.infoHash, {
+        magnetURI: magnetURI,
+        parsedMagnetURI: JSON.stringify(magnet),
+        createdAt: createdAt,
+        ip: req.headers['x-forwarded-for'] || req.connection.remoteAddress
+      }, function (err) {
+        redis.sadd('magnets:all', magnet.infoHash);
+        redis.zadd('magnets:createdAt', createdAt, magnet.infoHash);
+        redis.sadd('magnets:ip:' + ip, magnet.infoHash);
+        redis.rpush('magnets:crawl', magnet.infoHash);
+        // Insertion complete.
+        res.redirect('/');
+      });
+    }
   });
 });
 
