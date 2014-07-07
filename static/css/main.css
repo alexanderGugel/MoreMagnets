@@ -1,3 +1,32 @@
-html, body {
-  background: red;
+/*
+When setting the primary font stack, apply it to the Pure grid units along
+with `html`, `button`, `input`, `select`, and `textarea`. Pure Grids use
+specific font stacks to ensure the greatest OS/browser compatibility.
+*/
+html, button, input, select, textarea, .pure-g [class *= "pure-u"] {
+  font: 18px/1.7 "Open Sans", "Helvetica Neue", Helvetica, Arial sans-serif;
+  color: #333;
+}
+
+html {
+  padding: 0 0.5em;
+}
+
+header {
+  padding: 1em;
+  text-align: center;
+  border-bottom: 1px solid #eee;
+  margin-bottom: 1em;
+}
+
+.logo {
+  font-weight: 600;
+  color: #222;
+  text-decoration: none;
+}
+
+@media screen and (min-width: 48em) {
+  html {
+    padding: 0 3em;
+  }
 }

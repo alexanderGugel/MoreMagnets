@@ -3,7 +3,7 @@
   <head>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <title></title>
+    <title>trrnts</title>
     <meta name="description" content="">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link rel="stylesheet" href="http://yui.yahooapis.com/pure/0.5.0/pure-min.css">
@@ -14,9 +14,18 @@
     <!--[if gt IE 8]><!-->
         <link rel="stylesheet" href="http://yui.yahooapis.com/pure/0.5.0/grids-responsive-min.css">
     <!--<![endif]-->
+    <!-- <link rel="stylesheet" href="http://fonts.googleapis.com/css?family=Open+Sans:400,600,700,800,300"> -->
     <link rel="stylesheet" href="css/main.css">
   </head>
   <body>
+    <header>
+      <a href="/" class="logo">trrnts</a>
+    </header>
+    <!-- <p class="lead">
+      Welcome to <strong>trrnts</strong>. This is exactly like <em>The Pirate
+      Bay</em>, but without annoying Porn ads and a better and more consistent
+      implementation of the BitTorrent DHT protocol.
+    </p> -->
     {{#items}}
       {{#first}}
         <li><strong>{{name}}</strong></li>
@@ -25,5 +34,6 @@
         <li><a href="{{url}}">{{name}}</a></li>
       {{/link}}
     {{/items}}
+    <script src="http://d3js.org/d3.v3.min.js" charset="utf-8"></script>
   </body>
 </html>
