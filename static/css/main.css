@@ -76,6 +76,12 @@ header div:last-child {
   padding: 0.5em;
 }
 
+#top article aside {
+  float: right;
+  color: #eee;
+  font-weight: 800;
+}
+
 #top article:last-child {
   border-bottom: 0;
 }
