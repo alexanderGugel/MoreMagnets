@@ -30,9 +30,10 @@ server.use(bodyParser.urlencoded());
 server.get('/', function (req, res) {
   res.render('index', {
     "header": "Colors",
-    "items": [
+    "top": [
         {"name": "red", "first": true, "url": "#Red"},
         {"name": "green", "link": true, "url": "#Green"},
+        {"name": "blue", "link": true, "url": "#Blue"},
         {"name": "blue", "link": true, "url": "#Blue"}
     ],
     "empty": false
@@ -63,7 +64,9 @@ server.post('/submit', function (req, res) {
         n: magnet.name,
         ih: magnet.infoHash,
         ca: createdAt, // Created at (Unix timestamp)
-        ip: ip
+        ip: ip,
+        ps: -1 // Points: Indicate that this magnet has not been crawled yet.
+               // See bot.js for explanation of points.
       }, function (err) {
         redis.sadd('m:all', magnet.infoHash);
         redis.zadd('m:ca', createdAt, magnet.infoHash);

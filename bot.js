@@ -22,6 +22,16 @@ dht.on('peer', function (addr, infoHash, from) {
       redis.zadd('m:' + infoHash + ':p', new Date().getTime(), addr);
     }
   });
+  // Update points of corresponding magnet.
+  // Points: Number of peers that have been added within the last n ms.
+  var stop = new Date().getTime();
+  var start = stop - 100*60*10; // 10 minutes
+  redis.zcount('m:' + infoHash + ':p', start, stop, function (err, numberOfPeers) {
+    redis.hmset('m:' + infoHash, 'ps', numberOfPeers);
+    // Store historical points, so they can be easily graphed later on.
+    // stop = current timestamp, no need to regenerate it.
+    redis.zadd('m:' + infoHash + ':ps', stop, numberOfPeers);
+  });
 });
 
 // Used for building the graph.
