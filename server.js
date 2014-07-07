@@ -65,6 +65,7 @@ server.post('/submit', function (req, res) {
       }, function (err) {
         redis.sadd('m:all', magnet.infoHash);
         redis.zadd('m:ca', createdAt, magnet.infoHash);
+        redis.lpush('m:latest', magnet.infoHash);
         redis.sadd('m:ip:' + ip, magnet.infoHash);
         redis.rpush('m:crawl', magnet.infoHash);
         // Insertion complete.
