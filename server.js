@@ -33,14 +33,20 @@ server.get('/', function (req, res) {
     var multi = redis.multi();
     _.each(infoHashes, function (infoHash) {
       multi.hgetall('m:' + infoHash);
-      multi.zrevrange(['m:' + infoHash + ':ps', 0, 100, 'WITHSCORES']);
+      multi.zrevrange('m:' + infoHash + ':ps', 0, 100);
     });
     multi.exec(function (err, data) {
       // Ideally, every second data element contains the historical graph data.
       _.each(data, function (datum, index) {
         if (datum.n) {
-          var psPast = data[index+1];
-          datum.psPast = psPast;
+          datum.psPast = {};
+          datum.psPast.labels = [];
+          datum.psPast.data = [];
+          _.each(data[index+1], function (point) {
+            var point = point.split(':');
+            datum.psPast.labels.push(point[0]);
+            datum.psPast.data.push(point[1]);
+          });
           console.log(datum.psPast);
         }
       });
