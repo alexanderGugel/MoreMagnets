@@ -44,6 +44,9 @@ server.get('/', function (req, res) {
           console.log(datum.psPast);
         }
       });
+      data = _.filter(data, function (datum) {
+        return datum.n !== undefined;
+      });
       res.render('index', {
         top: data
       });
