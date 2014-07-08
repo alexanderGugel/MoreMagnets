@@ -96,7 +96,6 @@ header div:last-child {
 #top article canvas {
   position: absolute;
   bottom: 0;
-  background: red;
 }
 
 footer {

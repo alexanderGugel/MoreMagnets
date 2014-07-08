@@ -33,7 +33,7 @@ server.get('/', function (req, res) {
     var multi = redis.multi();
     _.each(infoHashes, function (infoHash) {
       multi.hgetall('m:' + infoHash);
-      multi.zrevrange('m:' + infoHash + ':ps', 0, 100);
+      multi.zrevrange('m:' + infoHash + ':ps', 0, 10);
     });
     multi.exec(function (err, data) {
       // Ideally, every second data element contains the historical graph data.
