@@ -30,10 +30,9 @@ dht.on('peer', function (addr, infoHash, from) {
     redis.hmset('m:' + infoHash, 'ps', numberOfPeers);
     // Store historical points, so they can be easily graphed later on.
     // stop = current timestamp, no need to regenerate it.
-    // Math.floor(stop/(1000*60*10)) changes every 10 minutes -> used for
-    // intervalls.
+    // timestamp changes every 5 seconds -> used for intervals.
     // Timestamp as field (needs to be unique)!
-    var timestamp = Math.floor(stop/(1000*60*10));
+    var timestamp = Math.floor(stop/(1000*5));
     // We don't want duplicates.
     redis.zremrangebyscore('m:' + infoHash + ':ps', timestamp, timestamp);
     // Trick for storing the same value multiple times.
