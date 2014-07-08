@@ -17,11 +17,12 @@ dht.on('peer', function (addr, infoHash, from) {
   // Store peers.
   // Score: LAST time peer has been added
   // Remove addr if already in sorted set.
+  var now = new Date().getTime;()
   redis.zrem('m:' + infoHash + ':p', addr);
-  redis.zadd('m:' + infoHash + ':p', new Date().getTime(), addr);
+  redis.zadd('m:' + infoHash + ':p', now, addr);
   // Update points of corresponding magnet.
   // Points: Number of peers that have been added/ updated within the last 10 minutes.
-  var stop = new Date().getTime();
+  var stop = now;
   var start = stop - 1000*60*10; // 10 minutes
   redis.zcount('m:' + infoHash + ':p', start, stop, function (err, numberOfPeers) {
     redis.hmset('m:' + infoHash, 'ps', numberOfPeers);
