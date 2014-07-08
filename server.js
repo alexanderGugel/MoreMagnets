@@ -40,7 +40,7 @@ var getStats = function (callback) {
   multi.zcard('loc_stats:countries');
   multi.zcard('loc_stats:regions');
   multi.zcard('loc_stats:cities');
-  multi.zrevrange(['loc_stats:lls', 0, 1000, 'WITHSCORES']);
+  multi.zrevrange(['loc_stats:lls', 0, 5000, 'WITHSCORES']);
 
   multi.exec(function (err, data) {
     var edges = {

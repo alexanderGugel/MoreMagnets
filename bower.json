@@ -9,6 +9,8 @@
   "private": true,
   "dependencies": {
     "chartjs": "^1.0.0",
-    "datamaps": "~0.3.3"
+    "datamaps": "~0.3.3",
+    "moment": "~2.7.0",
+    "livestampjs": "~1.1.2"
   }
 }

@@ -92,7 +92,10 @@ var drawCharts = function () {
       element: $map.get(0),
       fills: {
         defaultFill: '#eee',
-        BUBBLE: 'red'
+        BUBBLE: '#333'
+      },
+      geographyConfig: {
+        highlightOnHover: false
       }
     });
     var data = $map.data('data').split(',');
@@ -104,14 +107,23 @@ var drawCharts = function () {
         bubble = {
           latitude: data[i].split('|')[0],
           longitude: data[i].split('|')[1],
-          radius: 100*(parseInt(data[i+1])/max),
-          fillOptacity: 0.5,
+          radius: 100*(parseInt(data[i+1])/max)+2,
           fillKey: 'BUBBLE'
         };
         bubbles.push(bubble);
       }
     }
-    map.bubbles(bubbles);
+    map.bubbles(bubbles, {
+      borderWidth: 1,
+      borderColor: '#fff',
+      fillOpacity: 0.75,
+      highlightOnHover: true,
+      highlightFillColor: '#333',
+      highlightBorderColor: '#fff',
+      highlightBorderWidth: 2,
+      highlightFillOpacity: 0.85,
+      highlightOnHover: true
+    });
   })();
 };
 
