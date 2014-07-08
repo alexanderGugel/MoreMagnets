@@ -46,14 +46,31 @@ var drawCharts = function () {
     $canvas.attr('height', 100);
     $canvas.attr('width', $canvas.parent().width());
     var ctx = $canvas.get(0).getContext('2d');
-    var data = $canvas.data('data').split(',');
-    var labels = $canvas.data('labels').split(',');
+    var data = [], labels = [];
+    if ($canvas.data('data') && $canvas.data('labels')) {
+      data = $canvas.data('data').split(',');
+      labels = $canvas.data('labels').split(',');
+    }
     new Chart(ctx).Line(genData(labels, data), options);
   });
 };
 
 $(function () {
   drawCharts();
+  // Smooth scrolling to anchor links.
+  // See http://css-tricks.com/snippets/jquery/smooth-scrolling/
+  $('a[href*=#]:not([href=#])').click(function() {
+    if (location.pathname.replace(/^\//,'') == this.pathname.replace(/^\//,'') && location.hostname == this.hostname) {
+      var target = $(this.hash);
+      target = target.length ? target : $('[name=' + this.hash.slice(1) +']');
+      if (target.length) {
+        $('html,body').animate({
+          scrollTop: target.offset().top
+        }, 1000);
+        return false;
+      }
+    }
+  });
 });
 
 // Redraw charts on window resize.
