@@ -39,16 +39,17 @@ var rand255 = function () {
   return Math.floor(Math.random()*255);
 };
 
-var genPieData = function (labels, values) {
+var genDoughnutData = function (labels, values) {
   var data = [];
   for (var i = 0; i < labels.length; i++) {
+    var r = rand255(), g = rand255(), b = rand255();
     data.push({
       value: parseInt(values[i]),
-      color: 'rgb(' + rand255() + ',' + rand255() + ',' + rand255() + ')',
-      label: labels[i]
+      color: 'rgba(' + r + ',' + g + ',' + b + ',0.5)',
+      label: labels[i],
+      highlight: 'rgba(' + r + ',' + g + ',' + b + ',0.9)',
     });
   }
-  console.log(data);
   return data;
 };
 
@@ -71,16 +72,17 @@ var drawCharts = function () {
     var data = $canvas.data('data').split(','), values = [], labels = [];
     if (data) {
       // Every second item in data array is a value (vice versa with labels)
-      for (var i = 0; i < data.length; i += 2) {
+      var i;
+      for (i = 0; i < data.length; i += 2) {
         labels.push(data[i]);
       }
-      for (var i = 1; i < data.length; i += 2) {
+      for (i = 1; i < data.length; i += 2) {
         values.push(data[i]);
       }
     }
     canvas.style.width = '100%';
     $canvas.attr('height', $canvas.parent().height());
-    new Chart(ctx).Pie(genPieData(labels, values));
+    new Chart(ctx).Doughnut(genDoughnutData(labels, values));
   });
 };
 
