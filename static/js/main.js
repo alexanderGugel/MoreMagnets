@@ -63,7 +63,9 @@ var drawCharts = function () {
         highlight: 'rgba(' + r + ',' + g + ',' + b + ',0.9)',
       });
     }
-    new Chart(ctx).Doughnut(data);
+    new Chart(ctx).Doughnut(data, {
+      showTooltips: true
+    });
   });
   (function () {
     $map = $('#map');
