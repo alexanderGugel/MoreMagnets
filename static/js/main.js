@@ -65,45 +65,45 @@ var drawCharts = function () {
     }
     new Chart(ctx).Doughnut(data);
   });
-  // (function () {
-  //   $map = $('#map');
-  //   $map.empty();
-  //   var map = new Datamap({
-  //     element: $map.get(0),
-  //     fills: {
-  //       defaultFill: '#eee',
-  //       BUBBLE: '#333'
-  //     },
-  //     geographyConfig: {
-  //       highlightOnHover: false
-  //     }
-  //   });
-  //   var data = $map.data('data').split(',');
-  //   var bubbles = [];
-  //   if (data) {
-  //     // Every second item in data array is a value (vice versa with labels)
-  //     var bubble, max = parseInt(data[1]);
-  //     for (var i = 0; i < data.length; i += 2) {
-  //       bubble = {
-  //         latitude: data[i].split('|')[0],
-  //         longitude: data[i].split('|')[1],
-  //         radius: 100*(parseInt(data[i+1])/max)+2,
-  //         fillKey: 'BUBBLE'
-  //       };
-  //       bubbles.push(bubble);
-  //     }
-  //   }
-  //   map.bubbles(bubbles, {
-  //     borderWidth: 1,
-  //     borderColor: '#fff',
-  //     fillOpacity: 0.75,
-  //     highlightOnHover: true,
-  //     highlightFillColor: '#333',
-  //     highlightBorderColor: '#fff',
-  //     highlightBorderWidth: 2,
-  //     highlightFillOpacity: 0.85
-  //   });
-  // })();
+  (function () {
+    $map = $('#map');
+    $map.empty();
+    var map = new Datamap({
+      element: $map.get(0),
+      fills: {
+        defaultFill: '#eee',
+        BUBBLE: '#333'
+      },
+      geographyConfig: {
+        highlightOnHover: false
+      }
+    });
+    var data = $map.data('data').split(',');
+    var bubbles = [];
+    if (data) {
+      // Every second item in data array is a value (vice versa with labels)
+      var bubble, max = parseInt(data[1]);
+      for (var i = 0; i < data.length; i += 2) {
+        bubble = {
+          latitude: data[i].split('|')[0],
+          longitude: data[i].split('|')[1],
+          radius: 100*(parseInt(data[i+1])/max)+2,
+          fillKey: 'BUBBLE'
+        };
+        bubbles.push(bubble);
+      }
+    }
+    map.bubbles(bubbles, {
+      borderWidth: 1,
+      borderColor: '#fff',
+      fillOpacity: 0.75,
+      highlightOnHover: true,
+      highlightFillColor: '#333',
+      highlightBorderColor: '#fff',
+      highlightBorderWidth: 2,
+      highlightFillOpacity: 0.85
+    });
+  })();
 };
 
 $(function () {
