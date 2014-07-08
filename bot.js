@@ -42,7 +42,7 @@ dht.on('peer', function (addr, infoHash, from) {
 // Used for building the graph.
 dht.on('node', function (addr, nodeId, from) {
   console.info('Found potential node ' + addr + ' through ' + from);
-  redis.sadd('edges', from + '-' + addr);
+  redis.zadd('edges', new Date().getTime(), from + '-' + addr);
 });
 
 var crawl = function (infoHash, callback) {
