@@ -37,7 +37,7 @@ server.get('/', function (req, res) {
     multi.exec(function (err, magnets) {
       res.render('index', {
         top: magnets
-      })
+      });
     });
   });
 });
