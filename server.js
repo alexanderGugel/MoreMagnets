@@ -34,30 +34,35 @@ var cacheFront = function (req, res, next) {
 var getStats = function (callback) {
   var multi = redis.multi();
   multi.zcard('edges');
-  multi.hgetall('loc_stats:countries');
-  multi.hgetall('loc_stats:regions');
-  multi.hgetall('loc_stats:cities');
+  multi.zrevrange(['loc_stats:countries', 0, 10, 'WITHSCORES']);
+  multi.zrevrange(['loc_stats:regions', 0, 10, 'WITHSCORES']);
+  multi.zrevrange(['loc_stats:cities', 0, 10, 'WITHSCORES']);
+  multi.zcard('loc_stats:countries');
+  multi.zcard('loc_stats:regions');
+  multi.zcard('loc_stats:cities');
+
   multi.exec(function (err, data) {
-    var countries = data[1];
-    var regions = data[2];
-    var cities = data[3];
+    var edges = {
+      count: data[0]
+    };
+    var countries = {
+      data: data[1],
+      count: data[4]
+    };
+    var regions = {
+      data: data[2],
+      count: data[5]
+    };
+    var cities = {
+      data: data[3],
+      count: data[6]
+    };
+    console.log(edges);
     callback(err, {
-      edges: data[0],
-      countries:{
-        values: _.values(countries),
-        labels: _.keys(countries),
-        count: _.keys(data[1]).length
-      },
-      regions: {
-        values: _.values(regions),
-        labels: _.keys(regions),
-        count: _.keys(data[2]).length
-      },
-      cities: {
-        values: _.values(cities),
-        labels: _.keys(cities),
-        count: _.keys(data[3]).length
-      }
+      edges: edges,
+      countries: countries,
+      regions: regions,
+      cities: cities
     });
   });
 };
@@ -69,6 +74,7 @@ server.get('/', cacheFront, function (req, res) {
     var multi = redis.multi();
     _.each(infoHashes, function (infoHash) {
       multi.hgetall('m:' + infoHash);
+      // Retrieve latest points for data viz.
       multi.zrevrange('m:' + infoHash + ':ps', 0, 10);
     });
     multi.exec(function (err, data) {
@@ -90,7 +96,6 @@ server.get('/', cacheFront, function (req, res) {
       });
       // Get number of edges etc. in graph.
       getStats(function (err, stats) {
-        console.log(JSON.stringify(stats));
         res.render('index', {
           top: data,
           stats: stats

@@ -7,31 +7,29 @@ var _ = require('lodash');
 // TODO Currently very inefficient, since data is being regenerated every time.
 
 var genLocStats = function () {
-  redis.zrevrange('nodes', 0, 1000000, function (err, addrs) {
-    // Key: location in format country:region:city
-    // Value: count
-    var countries = {};
-    var regions = {};
-    var cities = {};
+  var multi = redis.multi();
+  multi.zrevrange('nodes', 0, 1000000);
+  multi.del('loc_stats:countries:copy');
+  multi.del('loc_stats:regions:copy');
+  multi.del('loc_stats:cities:copy');
+  multi.exec(function (err, results) {
+    var addrs = results[0];
     _.each(addrs, function (addr) {
       addr = addr.split(':')[0];
       var geo = geoip.lookup(addr);
       if (geo) {
-        countries[geo.country] = countries[geo.country] || 0;
-        countries[geo.country]++;
-        regions[geo.region] = regions[geo.region] || 0;
-        regions[geo.region]++;
-        cities[geo.city] = cities[geo.city] || 0;
-        cities[geo.city]++;
+        redis.zincrby('loc_stats:countries:copy', 1, geo.country);
+        redis.zincrby('loc_stats:regions:copy', 1, geo.region);
+        redis.zincrby('loc_stats:cities:copy', 1, geo.city);
       }
     });
-    redis.hmset('loc_stats:countries', countries);
-    redis.hmset('loc_stats:regions', regions);
-    redis.hmset('loc_stats:cities', cities);
-    setTimeout(function () {
-      genLocStats();
-    }, 1000);
+    redis.rename('loc_stats:countries:copy', 'loc_stats:countries');
+    redis.rename('loc_stats:regions:copy', 'loc_stats:regions');
+    redis.rename('loc_stats:cities:copy', 'loc_stats:cities');
   });
+  setTimeout(function () {
+    genLocStats();
+  }, 1000);
 };
 
 genLocStats();

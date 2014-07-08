@@ -43,11 +43,12 @@ var genPieData = function (labels, values) {
   var data = [];
   for (var i = 0; i < labels.length; i++) {
     data.push({
-      value: values[i],
+      value: parseInt(values[i]),
       color: 'rgb(' + rand255() + ',' + rand255() + ',' + rand255() + ')',
       label: labels[i]
     });
   }
+  console.log(data);
   return data;
 };
 
@@ -64,18 +65,19 @@ var drawCharts = function () {
     $canvas.attr('height', '50px');
     new Chart(ctx).Line(genLineData(labels, data), options);
   });
-  $('#stats').find('canvas').each(function (i, canvas) {
-    $canvas = $(canvas);
-    var ctx = $canvas.get(0).getContext('2d');
-    var values = [], labels = [];
-    if ($canvas.data('values') && $canvas.data('labels')) {
-      values = $canvas.data('values').split(',');
-      labels = $canvas.data('labels').split(',');
-    }
-    canvas.style.width = '100%';
-    $canvas.attr('height', '50px');
-    new Chart(ctx).Pie(genPieData(labels, values));
-  });
+  // $('#stats').find('canvas').each(function (i, canvas) {
+  //   $canvas = $(canvas);
+  //   var ctx = $canvas.get(0).getContext('2d');
+  //   var values = [], labels = [];
+  //   if ($canvas.data('data')) {
+  //     values = $canvas.data('values').split(',');
+  //     labels = $canvas.data('labels').split(',');
+  //   }
+  //   console.log(values);
+  //   canvas.style.width = '100%';
+  //   $canvas.attr('height', '50px');
+  //   new Chart(ctx).Pie(genPieData(labels, values));
+  // });
 };
 
 $(function () {
