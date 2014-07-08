@@ -41,6 +41,7 @@ var getStats = function (callback) {
   multi.zcard('loc_stats:regions');
   multi.zcard('loc_stats:cities');
   multi.zrevrange(['loc_stats:lls', 0, 5000, 'WITHSCORES']);
+  multi.zrevrange(['peers', 0, 5000, 'WITHSCORES']);
 
   multi.exec(function (err, data) {
     var edges = {
@@ -59,12 +60,29 @@ var getStats = function (callback) {
       count: data[6]
     };
     var lls = data[7];
+    var peers = data[8];
+
+    var stats = {};
+    for (var i = 0; i < peers.length; i += 2) {
+      var addr = peers[i];
+      var createdAt = peers[i+1];
+      // Similar to crawler (hash function).
+      var time = Math.floor(parseInt(createdAt)/50);
+      stats[time] = stats[time] || 0;
+      stats[time] += 1;
+    }
+
+    peers = {
+      labels: _.keys(stats),
+      data: _.values(stats)
+    };
     callback(err, {
       edges: edges,
       countries: countries,
       regions: regions,
       cities: cities,
-      lls: lls
+      lls: lls,
+      peers: peers
     });
   });
 };

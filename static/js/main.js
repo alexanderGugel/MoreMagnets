@@ -81,6 +81,15 @@ var drawCharts = function () {
     $canvas.attr('height', $canvas.parent().height());
     new Chart(ctx).Doughnut(genDoughnutData(labels, values));
   });
+  (function () {
+    $canvas = $('#status').find('canvas');
+    var ctx = $canvas.get(0).getContext('2d');
+    var labels = $canvas.data('labels').split(',');
+    var data = $canvas.data('data').split(',');
+    $canvas.get(0).style.width = '100%';
+    $canvas.attr('height', '50px');
+    new Chart(ctx).Line(genLineData(labels, data), options);
+  })();
 
   (function () {
     $map = $('#map');
