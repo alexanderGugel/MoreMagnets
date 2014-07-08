@@ -31,6 +31,16 @@ var cacheFront = function (req, res, next) {
   next();
 };
 
+var convertWithscoresToArrays = function (arr) {
+  var arr1 = [];
+  var arr2 = [];
+  for (var i = 0; i < arr.length; i += 2) {
+    arr1.push(arr[i]);
+    arr2.push(arr[i+1]);
+  }
+  return [arr1, arr2];
+};
+
 var getStats = function (callback) {
   var multi = redis.multi();
   multi.zcard('edges');
@@ -44,19 +54,26 @@ var getStats = function (callback) {
   multi.zrevrange(['peers', 0, 1000, 'WITHSCORES']);
 
   multi.exec(function (err, data) {
+    var parsed;
     var edges = {
       count: data[0]
     };
+    parsed = convertWithscoresToArrays(data[1]);
     var countries = {
-      data: data[1],
+      values: parsed[1],
+      labels: parsed[0],
       count: data[4]
     };
+    parsed = convertWithscoresToArrays(data[2]);
     var regions = {
-      data: data[2],
+      values: parsed[1],
+      labels: parsed[0],
       count: data[5]
     };
+    parsed = convertWithscoresToArrays(data[3]);
     var cities = {
-      data: data[3],
+      values: parsed[1],
+      labels: parsed[0],
       count: data[6]
     };
     var lls = data[7];

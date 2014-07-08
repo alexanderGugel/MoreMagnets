@@ -33,7 +33,7 @@
         <article class="pure-u-1 pure-u-md-1-2">
           <h4><a href="{{mu}}">{{n}}</a></h4>
           <aside><span data-ca="{{ca}}"></span> — <strong>{{ps}}</strong></aside>
-          <canvas data-data="{{psPast.data}}" data-labels="{{psPast.labels}}"></canvas>
+          <canvas data-type="line" data-data="{{psPast.data}}" data-labels="{{psPast.labels}}"></canvas>
         </article>
       {{/top}}
     </section>
@@ -59,29 +59,29 @@
         <h1>{{stats.cities.count}}</h1>
       </div>
       <div class="pure-u-1 pure-u-md-1-4">
-        <canvas data-data="{{stats.cities.data}}"></canvas>
+        <canvas data-type="doughnut" data-values="{{stats.cities.values}}" data-labels="{{stats.cities.labels}}"></canvas>
       </div>
       <div class="pure-u-1 pure-u-md-1-4">
         <h5>Number of regions using BitTorrent</h5>
         <h1>{{stats.regions.count}}</h1>
       </div>
       <div class="pure-u-1 pure-u-md-1-4">
-        <canvas data-data="{{stats.regions.data}}"></canvas>
+        <canvas data-type="doughnut" data-values="{{stats.regions.values}}" data-labels="{{stats.regions.labels}}"></canvas>
       </div>
       <div class="pure-u-1 pure-u-md-1-4">
         <h5>Number of countries using BitTorrent</h5>
         <h1>{{stats.countries.count}}</h1>
       </div>
       <div class="pure-u-1 pure-u-md-1-4">
-        <canvas data-data="{{stats.countries.data}}"></canvas>
+        <canvas data-type="doughnut" data-values="{{stats.countries.values}}" data-labels="{{stats.countries.labels}}"></canvas>
       </div>
       <div class="pure-u-1">
-        <div data-data="{{stats.lls}}" id="map" style="width: 100%; height: 500px;"></div>
+        <div data-type="map" data-data="{{stats.lls}}" id="map" style="width: 100%; height: 500px;"></div>
       </div>
     </section>
     <section id="status">
       <h4>Peers added (per 50 ms)</h4>
-      <canvas data-labels="{{stats.peers.labels}}" data-data="{{stats.peers.data}}"></canvas>
+      <canvas data-type="line" data-labels="{{stats.peers.labels}}" data-data="{{stats.peers.data}}"></canvas>
     </section>
     <footer class="pure-g">
       <form method="post" action="submit" id="submit" class="pure-u-1 pure-u-md-1-2">
