@@ -8,7 +8,7 @@ var _ = require('lodash');
 
 var genLocStats = function () {
   var multi = redis.multi();
-  multi.zrevrange('nodes', 0, 1000000);
+  multi.zrevrange('nodes', 0, 10000);
   multi.del('loc_stats:countries:copy');
   multi.del('loc_stats:regions:copy');
   multi.del('loc_stats:cities:copy');
@@ -25,10 +25,12 @@ var genLocStats = function () {
         !!geo.ll && redis.zincrby('loc_stats:lls:copy', 1, geo.ll.join('|'));
       }
     });
-    redis.rename('loc_stats:countries:copy', 'loc_stats:countries');
-    redis.rename('loc_stats:regions:copy', 'loc_stats:regions');
-    redis.rename('loc_stats:cities:copy', 'loc_stats:cities');
-    redis.rename('loc_stats:lls:copy', 'loc_stats:lls');
+
+    // noop, since key might not exists -> callback required to send error to
+    redis.rename('loc_stats:countries:copy', 'loc_stats:countries', _.noop);
+    redis.rename('loc_stats:regions:copy', 'loc_stats:regions', _.noop);
+    redis.rename('loc_stats:cities:copy', 'loc_stats:cities', _.noop);
+    redis.rename('loc_stats:lls:copy', 'loc_stats:lls', _.noop);
     genLocStats();
   });
 };
