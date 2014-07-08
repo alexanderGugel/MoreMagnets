@@ -49,10 +49,25 @@
     </section>
     <section id="stats" class="pure-g">
       <div class="pure-u-1 pure-u-md-1-2">
-        <h5>Number of edges in graph</h5>
+        <h5>Number of cities using BitTorrent</h5>
       </div>
       <div class="pure-u-1 pure-u-md-1-2">
-        <h5>{{stats}}</h5>
+        <h5>{{stats.cities.count}}</h5>
+        <canvas data-values="{{stats.cities.values}}" data-labels="{{stats.cities.labels}}"></canvas>
+      </div>
+      <div class="pure-u-1 pure-u-md-1-2">
+        <h5>Number of regions using BitTorrent</h5>
+      </div>
+      <div class="pure-u-1 pure-u-md-1-2">
+        <h5>{{stats.regions.count}}</h5>
+        <canvas data-values="{{stats.regions.values}}" data-labels="{{stats.regions.labels}}"></canvas>
+      </div>
+      <div class="pure-u-1 pure-u-md-1-2">
+        <h5>Number of countries using BitTorrent</h5>
+      </div>
+      <div class="pure-u-1 pure-u-md-1-2">
+        <h5>{{stats.countries.count}}</h5>
+        <canvas data-values="{{stats.countries.values}}" data-labels="{{stats.countries.labels}}"></canvas>
       </div>
     </section>
     <footer class="pure-g">

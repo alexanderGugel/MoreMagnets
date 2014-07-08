@@ -1,6 +1,6 @@
 Chart.defaults.global.responsive = true;
 Chart.defaults.global.showScale = false;
-Chart.defaults.global.showTooltips = false;
+// Chart.defaults.global.showTooltips = false;
 
 var options = {
   ///Boolean - Whether grid lines are shown across the chart
@@ -25,7 +25,7 @@ var options = {
   datasetFill: false
 };
 
-var genData = function (labels, data) {
+var genLineData = function (labels, data) {
   return {
     labels: labels,
     datasets: [{
@@ -33,6 +33,22 @@ var genData = function (labels, data) {
       data: data
     }]
   };
+};
+
+var rand255 = function () {
+  return Math.floor(Math.random()*255);
+};
+
+var genPieData = function (labels, values) {
+  var data = [];
+  for (var i = 0; i < labels.length; i++) {
+    data.push({
+      value: values[i],
+      color: 'rgb(' + rand255() + ',' + rand255() + ',' + rand255() + ')',
+      label: labels[i]
+    });
+  }
+  return data;
 };
 
 var drawCharts = function () {
@@ -45,8 +61,20 @@ var drawCharts = function () {
       labels = $canvas.data('labels').split(',');
     }
     canvas.style.width = '100%';
-    $canvas.attr('height', 50);
-    new Chart(ctx).Line(genData(labels, data), options);
+    $canvas.attr('height', '50px');
+    new Chart(ctx).Line(genLineData(labels, data), options);
+  });
+  $('#stats').find('canvas').each(function (i, canvas) {
+    $canvas = $(canvas);
+    var ctx = $canvas.get(0).getContext('2d');
+    var values = [], labels = [];
+    if ($canvas.data('values') && $canvas.data('labels')) {
+      values = $canvas.data('values').split(',');
+      labels = $canvas.data('labels').split(',');
+    }
+    canvas.style.width = '100%';
+    $canvas.attr('height', '50px');
+    new Chart(ctx).Pie(genPieData(labels, values));
   });
 };
 

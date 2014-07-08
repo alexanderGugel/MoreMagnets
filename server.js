@@ -36,14 +36,28 @@ var getStats = function (callback) {
   multi.zcard('edges');
   multi.hgetall('loc_stats:countries');
   multi.hgetall('loc_stats:regions');
-  multi.hgetall('loc_stats:citites');
+  multi.hgetall('loc_stats:cities');
   multi.exec(function (err, data) {
-    console.log(data);
+    var countries = data[1];
+    var regions = data[2];
+    var cities = data[3];
     callback(err, {
       edges: data[0],
-      countries: data[1],
-      regions: data[2],
-      citites: data[3]
+      countries:{
+        values: _.values(countries),
+        labels: _.keys(countries),
+        count: _.keys(data[1]).length
+      },
+      regions: {
+        values: _.values(regions),
+        labels: _.keys(regions),
+        count: _.keys(data[2]).length
+      },
+      cities: {
+        values: _.values(cities),
+        labels: _.keys(cities),
+        count: _.keys(data[3]).length
+      }
     });
   });
 };
@@ -74,13 +88,14 @@ server.get('/', cacheFront, function (req, res) {
       data = _.filter(data, function (datum) {
         return datum.n !== undefined;
       });
-      // Get number of edges in graph.
+      // Get number of edges etc. in graph.
       getStats(function (err, stats) {
+        console.log(JSON.stringify(stats));
         res.render('index', {
           top: data,
           stats: stats
         });
-      })
+      });
     });
 
   });
