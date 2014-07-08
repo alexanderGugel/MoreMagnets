@@ -26,8 +26,13 @@ server.use(express.static(__dirname + '/static'));
 // Parse form data. TODO CSRF
 server.use(bodyParser.urlencoded());
 
+var cacheFront = function (req, res, next) {
+  // TODO
+  next();
+};
+
 // Serve index page.
-server.get('/', function (req, res) {
+server.get('/', cacheFront, function (req, res) {
   redis.zrevrange('m:top', 0, 20, function (err, infoHashes) {
     // Performance optimization: Get multiple magnets at once.
     var multi = redis.multi();
@@ -53,12 +58,23 @@ server.get('/', function (req, res) {
       data = _.filter(data, function (datum) {
         return datum.n !== undefined;
       });
-      res.render('index', {
-        top: data
+      // Get number of edges in graph.
+      redis.scard('edges', function (err, edgeCount) {
+        res.render('index', {
+          top: data,
+          stats: {
+            edgeCount: edgeCount
+          }
+        });
       });
     });
 
   });
+});
+
+// Serve detailed view for one magnet URI.
+server.get('/magnets/:infoHash', function (req, res) {
+
 });
 
 // Store a new Magnet URI.
