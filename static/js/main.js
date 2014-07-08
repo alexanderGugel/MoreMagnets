@@ -3,27 +3,26 @@ Chart.defaults.global.showScale = false;
 Chart.defaults.global.showTooltips = false;
 
 var options = {
+  ///Boolean - Whether grid lines are shown across the chart
+  scaleShowGridLines: false,
 
-    ///Boolean - Whether grid lines are shown across the chart
-    scaleShowGridLines : false,
+  //Boolean - Whether the line is curved between points
+  bezierCurve: true,
 
-    //Boolean - Whether the line is curved between points
-    bezierCurve : true,
+  //Number - Tension of the bezier curve between points
+  bezierCurveTension: 0.4,
 
-    //Number - Tension of the bezier curve between points
-    bezierCurveTension : 0.4,
+  //Boolean - Whether to show a dot for each point
+  pointDot: false,
 
-    //Boolean - Whether to show a dot for each point
-    pointDot : false,
+  //Boolean - Whether to show a stroke for datasets
+  datasetStroke: true,
 
-    //Boolean - Whether to show a stroke for datasets
-    datasetStroke : true,
+  //Number - Pixel width of dataset stroke
+  datasetStrokeWidth: 1,
 
-    //Number - Pixel width of dataset stroke
-    datasetStrokeWidth : 1,
-
-    //Boolean - Whether to fill the dataset with a colour
-    datasetFill : false
+  //Boolean - Whether to fill the dataset with a colour
+  datasetFill: false
 };
 
 var genData = function (labels, data) {

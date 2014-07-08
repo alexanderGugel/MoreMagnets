@@ -39,11 +39,9 @@
     </section>
     <section class="pure-g">
       <section id="latest" class="pure-u-1 pure-u-md-3-4">
-        {{#items}}
-          {{#link}}
-            <article class="pure-u-1 pure-u-md-1-2"><a href="{{url}}">{{name}}</a></article>
-          {{/link}}
-        {{/items}}
+        {{#latest}}
+          <article><a href="{{url}}">{{name}}</a></article>
+        {{/latest}}
       </section>
       <section id="upcoming" class="pure-u-1 pure-u-md-1-4">
         test
@@ -52,8 +50,6 @@
     <section id="stats">
 
     </section>
-
-
     <footer class="pure-g">
       <form method="post" action="submit" id="submit" class="pure-u-1 pure-u-md-1-2">
         <h5>Feel like infringing someone's copyright? <small>- Submit a Magnet Link!</small></h5>
