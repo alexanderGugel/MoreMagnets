@@ -65,19 +65,23 @@ var drawCharts = function () {
     $canvas.attr('height', '50px');
     new Chart(ctx).Line(genLineData(labels, data), options);
   });
-  // $('#stats').find('canvas').each(function (i, canvas) {
-  //   $canvas = $(canvas);
-  //   var ctx = $canvas.get(0).getContext('2d');
-  //   var values = [], labels = [];
-  //   if ($canvas.data('data')) {
-  //     values = $canvas.data('values').split(',');
-  //     labels = $canvas.data('labels').split(',');
-  //   }
-  //   console.log(values);
-  //   canvas.style.width = '100%';
-  //   $canvas.attr('height', '50px');
-  //   new Chart(ctx).Pie(genPieData(labels, values));
-  // });
+  $('#stats').find('canvas').each(function (i, canvas) {
+    $canvas = $(canvas);
+    var ctx = $canvas.get(0).getContext('2d');
+    var data = $canvas.data('data').split(','), values = [], labels = [];
+    if (data) {
+      // Every second item in data array is a value (vice versa with labels)
+      for (var i = 0; i < data.length; i += 2) {
+        labels.push(data[i]);
+      }
+      for (var i = 1; i < data.length; i += 2) {
+        values.push(data[i]);
+      }
+    }
+    canvas.style.width = '100%';
+    $canvas.attr('height', $canvas.parent().height());
+    new Chart(ctx).Pie(genPieData(labels, values));
+  });
 };
 
 $(function () {

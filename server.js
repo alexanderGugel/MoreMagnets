@@ -57,7 +57,6 @@ var getStats = function (callback) {
       data: data[3],
       count: data[6]
     };
-    console.log(edges);
     callback(err, {
       edges: edges,
       countries: countries,
