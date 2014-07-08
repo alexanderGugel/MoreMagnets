@@ -37,6 +37,8 @@ dht.on('peer', function (addr, infoHash, from) {
     redis.zadd('m:' + infoHash + ':ps', timestamp, timestamp + ':' + numberOfPeers);
     redis.zadd('m:top', numberOfPeers, infoHash);
   });
+
+  redis.zadd('peers', stop, addr);
 });
 
 // Used for building the graph.
@@ -52,6 +54,8 @@ dht.on('node', function (addr, nodeId, from) {
   redis.scard('edges:past', function (err, edgeCount) {
     redis.zadd('edges:past', timestamp, timestamp + ':' + edgeCount);
   });
+
+  redis.zadd('nodes', timestamp, addr);
 });
 
 var crawl = function (infoHash, callback) {
