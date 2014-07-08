@@ -60,9 +60,6 @@ header a {
   font-weight: 600;
 }
 
-.submit {
-}
-
 header div:first-child {
   text-align: left;
 }
@@ -73,7 +70,8 @@ header div:last-child {
 
 #top article {
   border-bottom: 1px solid #eee;
-  padding: 0.5em;
+  padding: 0.5em 0.5em 100px;
+  position: relative;
 }
 
 #top article aside {
@@ -93,6 +91,12 @@ header div:last-child {
 #top article a {
   color: #333;
   text-decoration: none;
+}
+
+#top article canvas {
+  position: absolute;
+  bottom: 0;
+  background: red;
 }
 
 footer {
@@ -148,12 +152,11 @@ footer nav a {
   #top article {
     border: 1px solid #eee;
     border-bottom: 0;
-    padding: 1em;
+    padding: 1em 1em 100px;
   }
   #top article:nth-child(odd) {
     border-right: 0;
   }
-
   #top article:nth-last-child(2), #top article:last-child {
     border-bottom: 1px solid #eee;
   }
