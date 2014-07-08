@@ -42,14 +42,14 @@ var genData = function (labels, data) {
 var drawCharts = function () {
   $('#top').find('canvas').each(function (i, canvas) {
     $canvas = $(canvas);
-    $canvas.attr('height', 100);
-    $canvas.attr('width', $canvas.parent().width());
     var ctx = $canvas.get(0).getContext('2d');
     var data = [], labels = [];
     if ($canvas.data('data') && $canvas.data('labels')) {
       data = $canvas.data('data').split(',');
       labels = $canvas.data('labels').split(',');
     }
+    canvas.style.width = '100%';
+    $canvas.attr('height', 50)
     new Chart(ctx).Line(genData(labels, data), options);
   });
 };
