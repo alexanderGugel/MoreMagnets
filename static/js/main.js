@@ -63,7 +63,7 @@ var drawCharts = function () {
     $canvas.attr('height', '50px');
     new Chart(ctx).Line(genLineData(labels, data), options);
   });
-  $('#stats').find('canvas').each(function (i, canvas) {
+  $('#stats').find('canvas').each(function (k, canvas) {
     $canvas = $(canvas);
     var ctx = $canvas.get(0).getContext('2d');
     var data = $canvas.data('data').split(','), values = [], labels = [];
