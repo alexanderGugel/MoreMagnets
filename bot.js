@@ -20,7 +20,7 @@ dht.on('peer', function (addr, infoHash, from) {
   redis.zrem('m:' + infoHash + ':p', addr);
   redis.zadd('m:' + infoHash + ':p', new Date().getTime(), addr);
   // Update points of corresponding magnet.
-  // Points: Number of peers that have been added within the last 10 minutes.
+  // Points: Number of peers that have been added/ updated within the last 10 minutes.
   var stop = new Date().getTime();
   var start = stop - 1000*60*10; // 10 minutes
   redis.zcount('m:' + infoHash + ':p', start, stop, function (err, numberOfPeers) {
