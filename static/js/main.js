@@ -29,12 +29,8 @@ var genData = function (labels, data) {
   return {
     labels: labels,
     datasets: [{
-      strokeColor: "#eee",
-      data: data,
-      pointColor: "rgba(220,220,220,1)",
-      pointStrokeColor: "#fff",
-      pointHighlightFill: "#fff",
-      pointHighlightStroke: "rgba(220,220,220,1)",
+      strokeColor: '#eee',
+      data: data
     }]
   };
 };
@@ -49,7 +45,7 @@ var drawCharts = function () {
       labels = $canvas.data('labels').split(',');
     }
     canvas.style.width = '100%';
-    $canvas.attr('height', 50)
+    $canvas.attr('height', 50);
     new Chart(ctx).Line(genData(labels, data), options);
   });
 };
