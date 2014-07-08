@@ -31,6 +31,23 @@ var cacheFront = function (req, res, next) {
   next();
 };
 
+var getStats = function (callback) {
+  var multi = redis.multi();
+  multi.zcard('edges');
+  multi.hgetall('loc_stats:countries');
+  multi.hgetall('loc_stats:regions');
+  multi.hgetall('loc_stats:citites');
+  multi.exec(function (err, data) {
+    console.log(data);
+    callback(err, {
+      edges: data[0],
+      countries: data[1],
+      regions: data[2],
+      citites: data[3]
+    });
+  });
+};
+
 // Serve index page.
 server.get('/', cacheFront, function (req, res) {
   redis.zrevrange('m:top', 0, 20, function (err, infoHashes) {
@@ -52,21 +69,18 @@ server.get('/', cacheFront, function (req, res) {
             datum.psPast.labels.push(point[0]);
             datum.psPast.data.push(point[1]);
           });
-          console.log(datum.psPast);
         }
       });
       data = _.filter(data, function (datum) {
         return datum.n !== undefined;
       });
       // Get number of edges in graph.
-      redis.zcard('edges', function (err, edgeCount) {
+      getStats(function (err, stats) {
         res.render('index', {
           top: data,
-          stats: {
-            edgeCount: edgeCount
-          }
+          stats: stats
         });
-      });
+      })
     });
 
   });
