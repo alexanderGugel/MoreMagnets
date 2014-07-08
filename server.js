@@ -33,12 +33,22 @@ server.get('/', function (req, res) {
     var multi = redis.multi();
     _.each(infoHashes, function (infoHash) {
       multi.hgetall('m:' + infoHash);
+      multi.zrevrange(['m:' + infoHash + ':ps', 0, 100, 'WITHSCORES']);
     });
-    multi.exec(function (err, magnets) {
+    multi.exec(function (err, data) {
+      // Ideally, every second data element contains the historical graph data.
+      _.each(data, function (datum, index) {
+        if (datum.n) {
+          var psPast = data[index+1];
+          datum.psPast = psPast;
+          console.log(datum.psPast);
+        }
+      });
       res.render('index', {
-        top: magnets
+        top: data
       });
     });
+
   });
 });
 

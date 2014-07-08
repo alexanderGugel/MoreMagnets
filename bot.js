@@ -32,7 +32,13 @@ dht.on('peer', function (addr, infoHash, from) {
     // stop = current timestamp, no need to regenerate it.
     // Math.floor(stop/(1000*60*10)) changes every 10 minutes -> used for
     // intervalls.
-    redis.zadd('m:' + infoHash + ':ps', Math.floor(stop/(1000*60*10)), numberOfPeers);
+    // Timestamp as field (needs to be unique)!
+    var timestamp = Math.floor(stop/(1000*60*10));
+    // We don't want duplicates.
+    redis.zremrangebyscore('m:' + infoHash + ':ps', timestamp, timestamp);
+    // Trick for storing the same value multiple times.
+    // See http://stackoverflow.com/a/21941678/3773544
+    redis.zadd('m:' + infoHash + ':ps', timestamp, timestamp + ':' + numberOfPeers);
     redis.zadd('m:top', numberOfPeers, infoHash);
   });
 });
