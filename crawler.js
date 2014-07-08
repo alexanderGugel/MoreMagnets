@@ -66,7 +66,7 @@ var crawl = function (infoHash, callback) {
   var lookup = function () {
     console.info(++counter +'. lookup on ' + infoHash);
     dht.lookup(infoHash);
-    if (counter === 10) {
+    if (counter === 3) {
       // We don't want to keep on executing the anonymous function every n
       // seconds if there is no peer having this torrent.
       clearInterval(timer);
