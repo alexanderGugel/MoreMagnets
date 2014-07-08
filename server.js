@@ -40,6 +40,7 @@ var getStats = function (callback) {
   multi.zcard('loc_stats:countries');
   multi.zcard('loc_stats:regions');
   multi.zcard('loc_stats:cities');
+  multi.zrevrange(['loc_stats:lls', 0, 1000, 'WITHSCORES']);
 
   multi.exec(function (err, data) {
     var edges = {
@@ -57,11 +58,13 @@ var getStats = function (callback) {
       data: data[3],
       count: data[6]
     };
+    var lls = data[7];
     callback(err, {
       edges: edges,
       countries: countries,
       regions: regions,
-      cities: cities
+      cities: cities,
+      lls: lls
     });
   });
 };

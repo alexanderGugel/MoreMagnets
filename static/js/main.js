@@ -84,6 +84,35 @@ var drawCharts = function () {
     $canvas.attr('height', $canvas.parent().height());
     new Chart(ctx).Doughnut(genDoughnutData(labels, values));
   });
+
+  (function () {
+    $map = $('#map');
+    $map.empty();
+    var map = new Datamap({
+      element: $map.get(0),
+      fills: {
+        defaultFill: '#eee',
+        BUBBLE: 'red'
+      }
+    });
+    var data = $map.data('data').split(',');
+    var bubbles = [];
+    if (data) {
+      // Every second item in data array is a value (vice versa with labels)
+      var bubble, max = parseInt(data[1]);
+      for (var i = 0; i < data.length; i += 2) {
+        bubble = {
+          latitude: data[i].split('|')[0],
+          longitude: data[i].split('|')[1],
+          radius: 100*(parseInt(data[i+1])/max),
+          fillOptacity: 0.5,
+          fillKey: 'BUBBLE'
+        };
+        bubbles.push(bubble);
+      }
+    }
+    map.bubbles(bubbles);
+  })();
 };
 
 $(function () {
