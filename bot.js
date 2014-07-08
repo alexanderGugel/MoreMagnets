@@ -15,13 +15,10 @@ dht.listen(dhtPort, function () {
 dht.on('peer', function (addr, infoHash, from) {
   console.info('Found potential peer ' + addr + ' through ' + from);
   // Store peers.
-  // get id for result
-  // Score: FIRST time peer has been added
-  redis.zrank('m:' + infoHash + ':p', addr, function (err, exists) {
-    if (!exists) {
-      redis.zadd('m:' + infoHash + ':p', new Date().getTime(), addr);
-    }
-  });
+  // Score: LAST time peer has been added
+  // Remove addr if already in sorted set.
+  redis.zrem('m:' + infoHash + ':p', addr);
+  redis.zadd('m:' + infoHash + ':p', new Date().getTime(), addr);
   // Update points of corresponding magnet.
   // Points: Number of peers that have been added within the last 10 minutes.
   var stop = new Date().getTime();
