@@ -57,11 +57,8 @@ var drawCharts = function () {
   $('#top').find('canvas').each(function (i, canvas) {
     $canvas = $(canvas);
     var ctx = $canvas.get(0).getContext('2d');
-    var data = [], labels = [];
-    if ($canvas.data('data') && $canvas.data('labels')) {
-      data = $canvas.data('data').split(',');
-      labels = $canvas.data('labels').split(',');
-    }
+    var data = $canvas.data('data').split(',');
+    var labels = $canvas.data('labels').split(',');
     canvas.style.width = '100%';
     $canvas.attr('height', '50px');
     new Chart(ctx).Line(genLineData(labels, data), options);
@@ -121,8 +118,7 @@ var drawCharts = function () {
       highlightFillColor: '#333',
       highlightBorderColor: '#fff',
       highlightBorderWidth: 2,
-      highlightFillOpacity: 0.85,
-      highlightOnHover: true
+      highlightFillOpacity: 0.85
     });
   })();
 };
@@ -144,6 +140,16 @@ $(function () {
     }
   });
 });
+
+var updateCa = function () {
+  $('[data-ca]').each(function (i, el) {
+    var $el = $(el);
+    $el.text(moment($el.data('ca')).fromNow());
+  });
+};
+
+updateCa();
+setInterval(updateCa, 1000);
 
 // Redraw charts on window resize.
 $(window).resize(drawCharts);
