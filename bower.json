@@ -8,6 +8,6 @@
   "license": "ISC",
   "private": true,
   "dependencies": {
-    "chartjs": "~0.2.0"
+    "chartjs": "^1.0.0"
   }
 }
