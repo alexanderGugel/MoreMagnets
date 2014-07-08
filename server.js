@@ -43,7 +43,7 @@ server.get('/', function (req, res) {
           datum.psPast.labels = [];
           datum.psPast.data = [];
           _.each(data[index+1], function (point) {
-            var point = point.split(':');
+            point = point.split(':');
             datum.psPast.labels.push(point[0]);
             datum.psPast.data.push(point[1]);
           });
