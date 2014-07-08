@@ -94,7 +94,7 @@ var crawlNext = function () {
 // Don't lookup before dht is ready (started listening).
 dht.on('ready', function () {
   // Retrieve and crawl next Magnet URI every 7 seconds.
-  setInterval(crawlNext, 7000);
+  setInterval(crawlNext, 3000);
   // Invoke crawlNext, since we don't want to wait 10 seconds before we start
   // retrieving the first crawl job.
   crawlNext();
