@@ -29,7 +29,7 @@ var genLineData = function (labels, data) {
   return {
     labels: labels,
     datasets: [{
-      strokeColor: '#eee',
+      strokeColor: '#999',
       data: data
     }]
   };
