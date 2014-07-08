@@ -59,7 +59,7 @@ server.get('/', cacheFront, function (req, res) {
         return datum.n !== undefined;
       });
       // Get number of edges in graph.
-      redis.scard('edges', function (err, edgeCount) {
+      redis.zcard('edges', function (err, edgeCount) {
         res.render('index', {
           top: data,
           stats: {

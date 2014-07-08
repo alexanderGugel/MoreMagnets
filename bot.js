@@ -42,7 +42,16 @@ dht.on('peer', function (addr, infoHash, from) {
 // Used for building the graph.
 dht.on('node', function (addr, nodeId, from) {
   console.info('Found potential node ' + addr + ' through ' + from);
-  redis.zadd('edges', new Date().getTime(), from + '-' + addr);
+  var edge = from + '-' + addr;
+  var now = new Date().getTime();
+  redis.zadd('edges', now, edge);
+
+  // Same as above (storage of historical points).
+  var timestamp = Math.floor(now/(1000*5));
+  redis.zremrangebyscore('edges:past', timestamp, timestamp);
+  redis.scard('edges:past', function (err, edgeCount) {
+    redis.zadd('edges:past', timestamp, timestamp + ':' + edgeCount);
+  });
 });
 
 var crawl = function (infoHash, callback) {
