@@ -2,7 +2,7 @@
 
 # trrnts
 
-= The Pirate Bay + Digg
+= The Pirate Bay + Digg - annoying porn ads
 
 ### Screenshots of the web interface
 
