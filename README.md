@@ -4,6 +4,20 @@
 
 = The Pirate Bay + Digg
 
+### Screenshots of the web interface
+
+![](https://raw.githubusercontent.com/alexanderGugel/trrnts/gh-pages/1.png)
+
+![](https://raw.githubusercontent.com/alexanderGugel/trrnts/gh-pages/2.png)
+
+![](https://raw.githubusercontent.com/alexanderGugel/trrnts/gh-pages/3.png)
+
+![](https://raw.githubusercontent.com/alexanderGugel/trrnts/gh-pages/4.png)
+
+![](https://raw.githubusercontent.com/alexanderGugel/trrnts/gh-pages/5.png)
+
+*Please note that the web interface represents only a small fraction of the data that has been indexed by the crawler (e.g. graphs could be visualized, too).*
+
 ### Getting started
 
 1. Start Redis.
