@@ -37,15 +37,18 @@
         </article>
       {{/top}}
     </section>
-    <section class="pure-g">
+    <section class="pure-g" id="more-magnets">
       <section id="latest" class="pure-u-1 pure-u-md-3-4">
         <h4>Latest</h4>
         {{#latest}}
-          <article><a href="{{url}}">{{name}}</a></article>
+          <article class="pure-g">
+            <span class="pure-u-1-5 score">{{ps}}</span>
+            <a class="pure-u-4-5" href="{{mu}}">{{n}} <div class="score">— <span data-ca="{{ca}}"></span></div></a>
+          </article>
         {{/latest}}
       </section>
       <section id="upcoming" class="pure-u-1 pure-u-md-1-4">
-        test
+
       </section>
     </section>
     <section id="stats" class="pure-g">

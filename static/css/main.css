@@ -101,6 +101,39 @@ header div:last-child {
   text-decoration: none;
 }
 
+#latest {
+  margin-top: 1.5em;
+}
+
+#latest article {
+  border-bottom: 1px solid #eee;
+  padding: 0.5em;
+}
+
+#latest article [data-ca] {
+  font-size: 80%;
+  color: #ccc;
+}
+
+#latest h4 {
+  border-bottom: 1px solid #eee;
+  color: #999;
+  padding: 0.5em;
+  text-transform: uppercase;
+}
+
+#latest article a {
+  color: #333;
+  font-weight: 600;
+  word-wrap: break-word;
+  text-decoration: none;
+}
+
+#latest .score {
+  color: #ccc;
+  font-weight: 300;
+}
+
 #map {
   margin-top: 3em;
 }
@@ -171,5 +204,11 @@ footer nav a {
   }
   #top article:nth-last-child(2), #top article:last-child {
     border-bottom: 1px solid #eee;
+  }
+  #latest article {
+    padding: 1em;
+  }
+  #latest h4 {
+    padding: 0 1em;
   }
 }

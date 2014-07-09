@@ -105,7 +105,7 @@ var getStats = function (callback) {
 };
 
 var getTop = function (callback) {
-  redis.zrevrange('m:top', 0, 20, function (err, infoHashes) {
+  redis.zrevrange('m:top', 0, 31, function (err, infoHashes) {
     // Performance optimization: Get multiple magnets at once.
     var multi = redis.multi();
     _.each(infoHashes, function (infoHash) {
@@ -135,14 +135,30 @@ var getTop = function (callback) {
   });
 };
 
+var getLatest = function (callback) {
+  redis.lrange('m:latest', 0, 50, function (err, infoHashes) {
+    // Performance optimization: Get multiple magnets at once.
+    var multi = redis.multi();
+    _.each(infoHashes, function (infoHash) {
+      multi.hgetall('m:' + infoHash);
+    });
+    multi.exec(function (err, latest) {
+      callback(null, latest);
+    });
+  });
+};
+
 // Serve index page.
 server.get('/', cacheFront, function (req, res) {
   // Get number of edges etc. in graph.
   getStats(function (err, stats) {
     getTop(function (err, top) {
-      res.render('index', {
-        top: top,
-        stats: stats
+      getLatest(function (err, latest) {
+        res.render('index', {
+          top: top,
+          latest: latest,
+          stats: stats
+        });
       });
     });
   });
