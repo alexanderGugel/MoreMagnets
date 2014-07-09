@@ -164,11 +164,6 @@ server.get('/', cacheFront, function (req, res) {
   });
 });
 
-// Serve detailed view for one magnet URI.
-server.get('/magnets/:infoHash', function (req, res) {
-
-});
-
 // Store a new Magnet URI.
 server.post('/submit', function (req, res) {
   // TODO Display flash messages!
@@ -182,7 +177,7 @@ server.post('/submit', function (req, res) {
   // Don't insert duplicates!
   redis.exists('m:' + magnet.infoHash, function (err, exists) {
     if (exists) {
-      res.redirect('/');
+      res.redirect('/#submit');
     } else {
       // Everything is ok, insert Magnet in database.
       var createdAt = new Date().getTime();
@@ -203,7 +198,7 @@ server.post('/submit', function (req, res) {
         redis.sadd('m:ip:' + ip, magnet.infoHash);
         redis.rpush('m:crawl', magnet.infoHash);
         // Insertion complete.
-        res.redirect('/');
+        res.redirect('/#latest');
       });
     }
   });
