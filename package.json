@@ -1,6 +1,6 @@
 {
   "name": "trrnts",
-  "version": "0.0.0",
+  "version": "1.0.0",
   "description": "",
   "scripts": {
     "start": "forever start -o server.log server.js && forever start -o crawler.log crawler.js && forever start -o stat-generator.log stat-generator.js",
