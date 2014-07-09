@@ -86,6 +86,7 @@ var crawlNext = function () {
       console.error('Failed to retrieve crawl job: ' + err.message);
     } else if (infoHash) {
       // Emulate ring buffer.
+      // TODO Bug: What happens if crawler stops between two jobs?
       redis.rpush('m:crawl', infoHash);
       crawl(infoHash);
     }
