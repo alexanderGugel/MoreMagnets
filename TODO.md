@@ -1,5 +1,4 @@
-TODO
-
+# TODO
 
 - Smarter, more robust bot									+
 - Complete reimplementation of the DHT protocol (current module: fork of buggy repo)		++
