@@ -64,7 +64,26 @@ The app can be stopped using `npm stop`.
   *key:* **discovered at**  
   *value:* **[from addr]-[to addr]**
 
-- ...
+- *Sorted Set* - **edges:past**
+
+  *key:* **timestamp** (changes every 5 seconds)  
+  *value:* **number** (snapshot) of edges at this timestamp
+
+- *Sorted Set* - **nodes**
+
+  *key:* **last seen at**  
+  *value:* **ip** of node
+
+- *Sorted Set* - **m:[infoHash]:p**
+
+  *key:* **last seen at**  
+  *value:* **ip** of peer
+
+- *Sorted Set* - **m:[infoHash]:ps**
+
+  *key:* **timestamp** (changes every 5 seconds)  
+  *value:* **number** of peers that have been discovered within 5 seconds
+  at this point in time
 
 ### Design Principles
 
