@@ -47,7 +47,7 @@ The app can be stopped using `npm stop`.
   *key:* **created at**  
   *value:* **infohash**
 
-- *List* - **m:lastest**
+- *List* - **m:latest**
 
   contains **infohashes** (newest first)
 
