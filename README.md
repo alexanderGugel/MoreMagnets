@@ -1,4 +1,4 @@
-**WIP** This project has been created within less than two days during the Solo Hackathon at [Hack Reactor](http://www.hackreactor.com/).
+**WIP** This project has been created by me within less than two days during the Solo Hackathon at [Hack Reactor](http://www.hackreactor.com/). Currently we're working on it as a team during the project phase. You can see our progress at [Trrnts/Trrnts](https://github.com/Trrnts/Trrnts).
 
 # trrnts
 
