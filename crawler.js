@@ -52,7 +52,7 @@ dht.on('node', function (addr, nodeId, from) {
   // Same as above (storage of historical points).
   var timestamp = Math.floor(now/(1000*5));
   redis.zremrangebyscore('edges:past', timestamp, timestamp);
-  redis.scard('edges:past', function (err, edgeCount) {
+  redis.zcard('edges', function (err, edgeCount) {
     redis.zadd('edges:past', timestamp, timestamp + ':' + edgeCount);
   });
 
