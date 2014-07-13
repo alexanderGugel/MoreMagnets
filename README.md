@@ -1,4 +1,6 @@
-**WIP** This project has been created by me within less than two days during the Solo Hackathon at [Hack Reactor](http://www.hackreactor.com/). Because of the hight interest in it, we're currently working on it as a team of four. You can see our progress at [Trrnts/Trrnts](https://github.com/Trrnts/Trrnts). This repo is a primarily a PoC.
+This project has been created by me within less than two days during the Solo Hackathon at [Hack Reactor](http://www.hackreactor.com/). Because of the high interest in it, we're currently working on it as a team of four. You can see our progress at [Trrnts/Trrnts](https://github.com/Trrnts/Trrnts). This repo is a primarily a PoC. If you want to contribute, please send PRs to [Trrnts/Trrnts](https://github.com/Trrnts/Trrnts), since this repo is no longer under active development.
+
+---------------------------------------------------------------------------------------------------------------------------
 
 # trrnts
 
