@@ -8,15 +8,15 @@ This project has been created by me within less than two days during the Solo Ha
 
 ### Screenshots of the web interface
 
-![](https://raw.githubusercontent.com/alexanderGugel/trrnts/gh-pages/1.png)
+![](https://raw.githubusercontent.com/alexanderGugel/trrnts-hackathon/gh-pages/1.png)
 
-![](https://raw.githubusercontent.com/alexanderGugel/trrnts/gh-pages/2.png)
+![](https://raw.githubusercontent.com/alexanderGugel/trrnts-hackathon/gh-pages/2.png)
 
-![](https://raw.githubusercontent.com/alexanderGugel/trrnts/gh-pages/3.png)
+![](https://raw.githubusercontent.com/alexanderGugel/trrnts-hackathon/gh-pages/3.png)
 
-![](https://raw.githubusercontent.com/alexanderGugel/trrnts/gh-pages/4.png)
+![](https://raw.githubusercontent.com/alexanderGugel/trrnts-hackathon/gh-pages/4.png)
 
-![](https://raw.githubusercontent.com/alexanderGugel/trrnts/gh-pages/5.png)
+![](https://raw.githubusercontent.com/alexanderGugel/trrnts-hackathon/gh-pages/5.png)
 
 *Please note that the web interface represents only a small fraction of the data that has been indexed by the crawler (e.g. graphs could be visualized, too).*
 
