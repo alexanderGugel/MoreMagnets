@@ -2,9 +2,9 @@ This project has been created by me within less than two days during the Solo Ha
 
 ---------------------------------------------------------------------------------------------------------------------------
 
-# trrnts
+# MoreMagnets
 
-= The Pirate Bay + Digg - annoying porn ads
+= The Pirate Bay + Digg - annoying porn ads - piracy
 
 ### Screenshots of the web interface
 
